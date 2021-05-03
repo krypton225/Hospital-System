@@ -1,0 +1,21 @@
+CREATE TABLE hr.hospital_doctor (
+    id_doctor              NUMBER
+        NOT NULL DISABLE NOVALIDATE,
+    name_doctor            VARCHAR2(30 BYTE)
+        NOT NULL DISABLE NOVALIDATE,
+    age_doctor             NUMBER
+        NOT NULL DISABLE NOVALIDATE,
+    specialist_doctor_fk   NUMBER
+        NOT NULL DISABLE NOVALIDATE,
+    degree_doctor          VARCHAR2(30 BYTE)
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+    DEFAULT );
+
+ALTER TABLE hr.hospital_doctor ADD CONSTRAINT hospital_doctor_pk PRIMARY KEY ( id_doctor ) DISABLE NOVALIDATE;
+
+ALTER TABLE hr.hospital_doctor
+    ADD CONSTRAINT spec_fk FOREIGN KEY ( specialist_doctor_fk )
+        REFERENCES hr.hospital_speciality ( id_spec )
+    NOT DEFERRABLE;
