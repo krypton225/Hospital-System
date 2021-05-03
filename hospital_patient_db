@@ -1,0 +1,34 @@
+CREATE TABLE hr.hospital_patient (
+    id_patient          NUMBER
+        NOT NULL NOVALIDATE,
+    name_patient        VARCHAR2(30 BYTE)
+        NOT NULL NOVALIDATE,
+    age_patient         NUMBER
+        NOT NULL NOVALIDATE,
+    status_patient      NUMBER(1)
+        NOT NULL NOVALIDATE,
+    specialization_fk   NUMBER
+        NOT NULL NOVALIDATE
+)
+PCTFREE 10 PCTUSED 40 TABLESPACE users LOGGING
+    STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+    DEFAULT );
+
+CREATE UNIQUE INDEX hr.hospital_patient_pk ON
+    hr.hospital_patient (
+        id_patient
+    ASC )
+        TABLESPACE users PCTFREE 10
+            STORAGE ( INITIAL 65536 NEXT 1048576 PCTINCREASE 0 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL
+            DEFAULT )
+        LOGGING;
+
+ALTER TABLE hr.hospital_patient
+    ADD CONSTRAINT hospital_patient_pk PRIMARY KEY ( id_patient )
+        USING INDEX hr.hospital_patient_pk
+    NOVALIDATE;
+
+ALTER TABLE hr.hospital_patient
+    ADD CONSTRAINT spec2_fk FOREIGN KEY ( specialization_fk )
+        REFERENCES hr.hospital_speciality ( id_spec )
+    NOT DEFERRABLE NOVALIDATE;
