@@ -1,4 +1,6 @@
 # Hospital-System
+This is a system to manage a hospital.
+© Khaled Mohamed (Krypton).
 
 - This is a system which is manage the system of a hospital.
 - Our langauge is used is JAVA.
